@@ -21,6 +21,10 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/policies", function(req, res) {
+    res.render("policies");
+  });
+
   app.get("/submission", function(req, res) {
     res.render("submission");
   });
