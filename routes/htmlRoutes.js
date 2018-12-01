@@ -5,6 +5,7 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
+        navbar: "nav",
         msg: "Welcome!",
         examples: dbExamples
       });
