@@ -7,13 +7,12 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     }
-  }),
-  
-     User.associate = function(models) {
-      User.hasMany(models.Post, {
-        onDelete: "cascade"
-      });
-    };
-  
-    return Author;
+  });
+  User.associate = function(models) {
+    User.hasMany(models.Post, {
+      onDelete: "cascade"
+    });
   };
+
+  return User;
+};
