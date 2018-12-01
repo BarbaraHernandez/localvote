@@ -20,8 +20,21 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/submission", function(req, res) {
+    res.render("submission");
+  });
+
+  app.get("/signin", function(req, res) {
+    res.render("signin");
+  });
+
+  app.get("/signup", function(req, res) {
+    res.render("signup");
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
   });
+
 };
