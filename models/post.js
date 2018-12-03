@@ -11,7 +11,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
-    }
+    },
+
+    createdAt: DataTypes.TIMESTAMP
   });
 
   Post.associate = function(models) {
