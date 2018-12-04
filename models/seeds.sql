@@ -2,7 +2,7 @@ USE vote_db;
 
 CREATE TABLE Posts (
     id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR NOT NULL,
+    title VARCHAR(250) NOT NULL,
     body TEXT NOT NULL,
     PRIMARY KEY (id)
 );
