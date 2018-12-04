@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 // Test connection using .env at database
 //console.log("databaseUrl: " + process.env.DATABASE_URL);
 var express = require("express");
