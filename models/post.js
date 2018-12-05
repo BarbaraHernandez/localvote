@@ -1,12 +1,16 @@
 module.exports = function(sequelize, DataTypes) {
   var Proposal = sequelize.define("Post", {
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
     category: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    createdAt: {
+      type: Sequelize.DATE,
       allowNull: false
     }
   });

@@ -1,11 +1,20 @@
 module.exports = function(sequelize, DataTypes) {
   var Account = sequelize.define("Account", {
-    name: {
+    firstName: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    accountCookie: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    accountId: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
   User.associate = function(models) {
@@ -13,6 +22,5 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
   };
-
   return Account;
 };
