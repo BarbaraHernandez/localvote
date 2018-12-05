@@ -1,4 +1,5 @@
 var db = require("../models");
+var passport = require("passport");
 
 module.exports = function(app) {
   // Get all examples
@@ -23,4 +24,21 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  app.get(
+    "/auth/facebook",
+    passport.authenticate("facebook", {
+      authType: "rerequest",
+      scope: "user_location"
+    })
+  );
+
+  app.get(
+    "/auth/facebook/callback",
+    passport.authenticate("facebook", { failureRedirect: "/signin" }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect("/");
+    }
+  );
 };
