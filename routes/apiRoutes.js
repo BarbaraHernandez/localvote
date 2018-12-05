@@ -6,7 +6,6 @@ var passport = require("passport"),
 require("../auth/facebook");
 
 module.exports = function(app) {
-  /*
   // Get all examples
   app.get("/api/examples", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
@@ -29,7 +28,6 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
-  */
 
   app.get(
     "/auth/facebook",
