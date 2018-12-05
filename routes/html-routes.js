@@ -31,6 +31,10 @@ module.exports = function(app) {
     res.render("submission");
   });
 
+  app.get("/policies", function(req, res) {
+    res.render("policies");
+  });
+
   app.get("/signin", function(req, res) {
     res.render("signin");
   });
@@ -39,6 +43,9 @@ module.exports = function(app) {
     res.render("signup");
   });
 
+  app.get("/policydetail", function(req, res) {
+    res.render("policydetail");
+  });
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
