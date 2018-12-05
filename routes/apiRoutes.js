@@ -1,7 +1,12 @@
-var db = require("../models");
-var passport = require("passport");
+// var db = require("../models");
+var passport = require("passport"),
+  // eslint-disable-next-line no-unused-vars
+  FacebookStrategy = require("passport-facebook").Strategy;
+
+require("../auth/facebook");
 
 module.exports = function(app) {
+  /*
   // Get all examples
   app.get("/api/examples", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
@@ -24,6 +29,7 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+  */
 
   app.get(
     "/auth/facebook",

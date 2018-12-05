@@ -4,10 +4,11 @@ require("dotenv").config();
 // Dependencies
 var express = require("express");
 var exphbs = require("express-handlebars");
-var passport = require("passport"),
-  FacebookStrategy = require("passport-facebook").Strategy;
 // var session = require("express-session");
+var passport = require("passport");
 var db = require("./models");
+var authInit = require("./auth/init");
+var authFacebookStrategy = require("./auth/facebook");
 
 // Initialize Express
 var app = express();
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Passport
+authInit(passport);
+authFacebookStrategy(passport);
 app.use(passport.initialize());
 /*
 app.use(
@@ -30,7 +33,6 @@ app.use(
 );
 app.use(passport.session());
 */
-require("./public/js/auth.js")(app);
 
 // Handlebars
 app.engine(
@@ -43,9 +45,9 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/auth-routes")(app);
-require("./routes/html-routes")(app);
-require("./routes/api-routes")(app);
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
+require("./routes/post-api")(app);
 
 var syncOptions = { force: false };
 
