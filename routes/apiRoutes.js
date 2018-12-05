@@ -1,4 +1,4 @@
-// var db = require("../models");
+var db = require("../models");
 var passport = require("passport"),
   // eslint-disable-next-line no-unused-vars
   FacebookStrategy = require("passport-facebook").Strategy;
