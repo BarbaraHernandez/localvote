@@ -68,3 +68,7 @@ body {
 #hands-image {
   box-flex: center;
 }
+
+#brand {
+  background-color: tan;
+}
