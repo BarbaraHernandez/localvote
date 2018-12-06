@@ -1,12 +1,16 @@
+// Keys
 require("dotenv").config();
 
-// Test connection using .env at database
-//console.log("databaseUrl: " + process.env.DATABASE_URL);
+// Dependencies
 var express = require("express");
 var exphbs = require("express-handlebars");
-
+// var session = require("express-session");
+var passport = require("passport");
 var db = require("./models");
+var authInit = require("./auth/init");
+var authFacebookStrategy = require("./auth/facebook");
 
+// Initialize Express
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -14,6 +18,21 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+
+// Passport
+authInit(passport);
+authFacebookStrategy(passport);
+app.use(passport.initialize());
+/*
+app.use(
+  session({
+    secret: "votes",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+app.use(passport.session());
+*/
 
 // Handlebars
 app.engine(
