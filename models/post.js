@@ -9,14 +9,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    policyDetail: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     createdAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false
     }
   });
 
-  Proposal.associate = function(models) {
-    Proposal.belongsTo(models.Account, {
+  Post.associate = function(models) {
+    Post.belongsTo(models.Account, {
       foreignKey: {
         allowNull: false
       }

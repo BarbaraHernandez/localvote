@@ -4,50 +4,36 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
   // GET route for getting all of the posts
-  app.get("/api/posts", function(req, res) {
-    var query = {};
-    if (req.query.account_id) {
-      query.AccountId = req.query.account_id;
-    }
-    // Here we add an "include" property to our options in our findAll query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
+  app.get("/post", function(req, res) {
+    db.Post.findAll().then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // Get all posts of a certain category
+  app.get("/api/posts/:category", function(req, res) {
     db.Post.findAll({
-      where: query,
-      include: [db.Account]
+      where: { category: req.params.category }
     }).then(function(dbPost) {
       res.json(dbPost);
     });
   });
 
-  app.get("/api/posts", function(req, res) {
-    var query = {};
-    if (req.query.account_id) {
-      query.UserId = req.query.account_id;
-    }
-    // Here we add an "include" property to our options in our findAll query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
-    db.Post.findAll({
-      where: query,
-      include: [db.Account]
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+  // Get all posts created by certain account using the account id
+  app.get("/api/accounts/:id", function(req, res) {
+    db.post
+      .findAll({ where: { accountID: reqparams.id } })
+      .then(function(dbPost) {
+        console.log("data", dbPost);
+        res.render("policies", { posts: data });
+      });
   });
 
-  // Get route for retrieving a single post
+  // Get one posts detail by post id
   app.get("/api/posts/:id", function(req, res) {
-    // Here we add an "include" property to our options in our findOne query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
-    db.Post.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Account]
-    }).then(function(dbPost) {
-      res.json(dbPost);
+    db.post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
+      console.log("data", dbPost);
+      res.render("policydetail", { posts: data });
     });
   });
 
@@ -58,13 +44,26 @@ module.exports = function(app) {
     });
   });
 
+  // Create a new post from the submission
+  app.post("/api/post", function(req, res) {
+    db.Post.create({
+      title: req.body.post,
+      policyDetail: req.body.policyDetail,
+      category: req.body.category,
+      AccountId: req.body.accountId
+    })
+      .then(function(dbPost) {
+        console.log("data", dbPost);
+        res.json(dbPost);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
+  });
+
   // DELETE route for deleting posts
   app.delete("/api/posts/:id", function(req, res) {
-    db.Post.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbPost) {
+    db.Post.destroy({ where: { id: req.params.id } }).then(function(dbPost) {
       res.json(dbPost);
     });
   });
