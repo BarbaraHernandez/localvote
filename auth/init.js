@@ -1,4 +1,4 @@
-var User = require("../models/user");
+var User = require("../models/account");
 
 // Can you pass all strategies into this file and then call from server to require passport less?
 // Common.js module system
