@@ -12,8 +12,8 @@ module.exports = function(app) {
   //   });
   // });
 
-app.get("/", function(req, res) {
-  res.render("index");
+  app.get("/", function(req, res) {
+    res.render("index");
   });
 
   // Load example page and pass in an example by id
