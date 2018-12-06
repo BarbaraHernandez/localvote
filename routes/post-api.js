@@ -4,14 +4,11 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
   // GET route for getting all of the posts
-  app.get("/api/posts", function(req, res) {
+  app.get("/post", function(req, res) {
     var query = {};
     if (req.query.account_id) {
       query.AccountId = req.query.account_id;
     }
-    // Here we add an "include" property to our options in our findAll query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
     db.Post.findAll({
       where: query,
       include: [db.Account]
@@ -20,6 +17,7 @@ module.exports = function(app) {
     });
   });
 
+  // Get route for getting all of the posts created by certain account id
   app.get("/api/posts", function(req, res) {
     var query = {};
     if (req.query.account_id) {
