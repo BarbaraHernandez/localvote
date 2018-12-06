@@ -39,6 +39,7 @@ app.engine(
   "handlebars",
   exphbs({
     defaultLayout: "main",
+    layoutsDir: __dirname + "./views/layouts",
     partialsPath: "views/partials"
   })
 );
