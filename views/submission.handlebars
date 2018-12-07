@@ -12,7 +12,7 @@
     <h1>Create A Policy</h1>
   </div>
  
-    <form>
+    <form id="newPolicy">
         <label for="exampleFormControlTextarea1">Title</label>
         <textarea class="form-control" id="submitTitle" rows="1"></textarea>
 
@@ -21,7 +21,8 @@
 
              <div class="form-group">
                 <label for="exampleSelect1">Select Topic</label>
-                <select class="form-control" id="exampleSelect1">
+                <select class="form-control" id="selectTopic">
+                <option>General</option>
                 <option>Business</option>
                 <option>Recreation</option>
                 <option>Infrastructure</option>
@@ -29,9 +30,7 @@
                 <option>Other</option>
                 </select>
             </div>
-
-        <label for="exampleFormControlTextarea1">Tags</label>
-        <textarea class="form-control" id="tags" rows="1"></textarea>
+      
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
