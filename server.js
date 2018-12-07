@@ -5,7 +5,7 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 var favicon = require("serve-favicon");
-// var session = require("express-session");
+var session = require("express-session");
 var passport = require("passport");
 var db = require("./models");
 var authInit = require("./auth/init");
@@ -22,10 +22,9 @@ app.use(express.static("public"));
 app.use(favicon(__dirname + "/favicon.ico"));
 
 // Passport
-// authInit(passport);
-// authFacebookStrategy(passport);
-// app.use(passport.initialize());
-/*
+authInit(passport);
+authFacebookStrategy(passport);
+app.use(passport.initialize());
 app.use(
   session({
     secret: "votes",
@@ -34,7 +33,6 @@ app.use(
   })
 );
 app.use(passport.session());
-*/
 
 // Handlebars
 app.engine(
@@ -50,6 +48,7 @@ app.set("view engine", "handlebars");
 require("./routes/htmlRoutes.js")(app);
 require("./routes/post-api.js")(app);
 require("./routes/account-api.js")(app);
+require("./routes/apiRoutes.js")(app, passport);
 
 var syncOptions = { force: false };
 

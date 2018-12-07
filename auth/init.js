@@ -1,15 +1,23 @@
-var User = require("../models/account");
-
-// Can you pass all strategies into this file and then call from server to require passport less?
-// Common.js module system
+var db = require("../models/account");
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
+    console.log("serializeUser");
     done(null, user.id);
   });
+
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
+    console.log("deseralizeUser");
+    db.Account.findOne({
+      where: {
+        accountId: id
+      }
+    })
+      .then(user => {
+        done(null, user);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 };
