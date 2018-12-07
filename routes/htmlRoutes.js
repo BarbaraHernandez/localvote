@@ -2,14 +2,18 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
+  // app.get("/", function(req, res) {
+  //   db.posts.findAll({}).then(function(examplePost) {
+  //     res.render("main", {
+  //       navbar: "nav",
+  //       msg: "Welcome!",
+  //       examples: examplePost
+  //     });
+  //   });
+  // });
+
   app.get("/", function(req, res) {
-    db.posts.findAll({}).then(function(examplePost) {
-      res.render("main", {
-        navbar: "nav",
-        msg: "Welcome!",
-        examples: examplePost
-      });
-    });
+    res.render("index");
   });
 
   // Load example page and pass in an example by id
