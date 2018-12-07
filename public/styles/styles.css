@@ -27,11 +27,22 @@
 .jumbotron {
   /* width: 70%; */
   align-content: center;
-  background-color: #e4ecef;
+  background-color: #fffeee;
 }
 
-.container {
+.sign-up-form {
   width: 60%;
+} 
+
+/* textarea {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+.container {
+  /* width: 60%; */
+  background-color: #fffeee
 };
 
 /* .vertical-center {
