@@ -30,9 +30,6 @@
   background-color: #fffeee;
 }
 
-.sign-up-form {
-  width: 60%;
-} 
 
 /* textarea {
   display: block;
@@ -83,4 +80,21 @@ body {
 
 #brand {
   background-color: tan;
+}
+
+.sign-form {
+  width: 30%;
+  box-flex: center;
+  align-content: center;
+  min-width: 600px;
+}
+
+p, 
+h1,
+h2,
+h3,
+h4,
+label, 
+button {
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
