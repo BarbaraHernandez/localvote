@@ -22,9 +22,9 @@ app.use(express.static("public"));
 app.use(favicon(__dirname + "/favicon.ico"));
 
 // Passport
-// authInit(passport);
-// authFacebookStrategy(passport);
-// app.use(passport.initialize());
+authInit(passport);
+authFacebookStrategy(passport);
+app.use(passport.initialize());
 /*
 app.use(
   session({
