@@ -34,18 +34,11 @@
       <td>Infrastructure</td>
       <td>10/29/2018</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Reduce homicide rate at the Perimeter Mall</td>
-      <td>Business</td>
-      <td>11/19/2018</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Free pre-K</td>
-      <td>Education</td>
-      <td>11/20/2018</td>
-    </tr>
+    {{#each post}}
+      <td>{{this.title}}</td>
+      <td>{{this.category}}</td>
+      <td>{{this.createdAt}}</td>
+    {{/each}}
   </tbody>
 </table>
 </p>
