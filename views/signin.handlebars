@@ -1,16 +1,41 @@
 {{> header}}
 {{> nav2}}
 
+<div class="col-xs-12" style="height:50px;"></div>
+
 <div class="row">
     <div class="col">
     </div>
-    <div class="col-10">
-<div class="sign-form">
-<div class="container";>
+    <div class="col-4">
+{{!-- <div class="sign-form">
+<div class="container";> --}}
+
+
+<div class="card">
+  <h5 class="card-header">Sign In</h5>
+  <div class="card-body">
+    <h5 class="card-title">Welcome back.</h5>
+    <p class="card-text">
+      <form>
+  <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+      {{!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="userPassword" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div><a href="/auth/facebook">Login with Facebook</a></div>
+
+  </div>
+</div>
 
 
 
-  <div>
+  {{!-- <div>
    <h1>Sign In</h1>
   </div>
 <form>
@@ -29,7 +54,7 @@
 
   </div>
 
-</div>
+</div> --}}
 
 
 
@@ -38,3 +63,5 @@
     </div>
   </div>
 </div>
+
+<div class="col-xs-12" style="height:50px;"></div>
