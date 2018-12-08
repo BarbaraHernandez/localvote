@@ -5,11 +5,12 @@
 .footer {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   line-height: 60px; 
   background-color: darkslategray;
-}
+  }
 
 .radio {
   display: block;
@@ -24,13 +25,21 @@
 }
 
 .jumbotron {
-  width: 70%;
+  /* width: 70%; */
   align-content: center;
-  background-color: #e4ecef;
+  background-color: #fffeee;
 }
 
+
+/* textarea {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
 .container {
-  width: 60%;
+  /* width: 60%; */
+  background-color: #fffeee
 };
 
 /* .vertical-center {
@@ -41,12 +50,25 @@
   align-items: center;
 } */
 
-#front-page-image {
-  display: block; margin-left: auto; margin-right: auto;
+.front-page-image {
+  display: block; 
+  margin-left: auto; margin-right: auto;
+  background-color: #fdaf40;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  display: block;
+  overflow: auto;
 }
 
 #front-page-div {
   background-color: #fdaf40;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
 }
 
 .topnav {
@@ -71,4 +93,25 @@ body {
 
 #brand {
   background-color: tan;
+}
+
+.sign-form {
+  width: 30%;
+  box-flex: center;
+  align-content: center;
+  min-width: 600px;
+}
+
+p, 
+h1,
+h2,
+h3,
+h4,
+label, 
+button {
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.card-header {
+  background-color: #fdaf40
 }
