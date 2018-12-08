@@ -50,12 +50,25 @@
   align-items: center;
 } */
 
-#front-page-image {
-  display: block; margin-left: auto; margin-right: auto;
+.front-page-image {
+  display: block; 
+  margin-left: auto; margin-right: auto;
+  background-color: #fdaf40;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  display: block;
+  overflow: auto;
 }
 
 #front-page-div {
   background-color: #fdaf40;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
 }
 
 .topnav {
@@ -97,4 +110,8 @@ h4,
 label, 
 button {
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.card-header {
+  background-color: #fdaf40
 }
