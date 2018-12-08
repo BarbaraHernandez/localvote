@@ -1,4 +1,4 @@
-# Local Vote
+# LocalVote
 
 ## Live Demo: 
 
