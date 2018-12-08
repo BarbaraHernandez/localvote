@@ -18,14 +18,14 @@ $(document).ready(function() {
       //not sure if I need to pass in time for timestamp
     };
 
-    console.log(newPolicy);
+    console.log("New Policy: " + newPolicy);
 
     submitPolicy(newPolicy);
   });
-});
 
-function submitPolicy(Policy) {
-  $.put("/api/posts", Policy, function() {
-    window.location.href = "/policies";
-  });
-}
+  function submitPolicy(Policy) {
+    $.post("/api/posts", Policy, function() {
+      window.location.href = "/policies";
+    });
+  }
+});
