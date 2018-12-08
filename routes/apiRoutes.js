@@ -1,11 +1,9 @@
-var db = require("../models");
-var passport = require("passport"),
-  // eslint-disable-next-line no-unused-vars
-  FacebookStrategy = require("passport-facebook").Strategy;
-
-require("../auth/facebook");
+var passport = require("passport");
 
 module.exports = function(app) {
+<<<<<<< HEAD
+  console.log("Seting up routes...");
+=======
   // Routes
   // =============================================================
   // GET route for getting all of the posts
@@ -108,19 +106,26 @@ module.exports = function(app) {
   });
 
   //Authentication
+>>>>>>> master
   app.get(
     "/auth/facebook",
     passport.authenticate("facebook", {
       authType: "rerequest",
       scope: "user_location"
-    })
+    }),
+    // eslint-disable-next-line no-unused-vars
+    (req, res) => {
+      console.log("Sign in sucessful!");
+    }
   );
 
   app.get(
     "/auth/facebook/callback",
-    passport.authenticate("facebook", { failureRedirect: "/signin" }),
-    function(req, res) {
-      // Successful authentication, redirect home.
+    passport.authenticate("facebook", {
+      failureRedirect: "/signin"
+    }),
+    (req, res) => {
+      // req.session.user = req.user;
       res.redirect("/");
     }
   );

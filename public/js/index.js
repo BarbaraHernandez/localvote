@@ -97,3 +97,22 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+// AJAX search
+$('#autocomplete').autocomplete({
+  lookup: function (query, done) {
+      serviceUrl: '/autocomplete/countries',
+      var result = {
+          suggestions: [
+              { "value": "United Arab Emirates", "data": "AE" },
+              { "value": "United Kingdom",       "data": "UK" },
+              { "value": "United States",        "data": "US" }
+          ]
+      };
+
+      done(result);
+  },
+  onSelect: function (suggestion) {
+      alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+  }
+});
