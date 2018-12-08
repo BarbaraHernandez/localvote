@@ -1,4 +1,4 @@
-var db = require("../models/account");
+var db = require("../models");
 var FacebookStrategy = require("passport-facebook").Strategy;
 
 module.exports = function(passport) {
@@ -12,13 +12,15 @@ module.exports = function(passport) {
         profileFields: ["id", "first_name", "last_name", "location"]
       },
       function(accessToken, refreshToken, profile, done) {
-        db.Account.findOne({
+        console.log("Facebook Strategy");
+        db.Account.findAll({
           where: {
             accountId: profile.id
           }
         })
           // eslint-disable-next-line no-unused-vars
           .then((dbAccount, err) => {
+            console.log(dbAccount);
             if (dbAccount) {
               console.log(dbAccount);
               done(null, dbAccount);

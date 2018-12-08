@@ -97,3 +97,14 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+// AJAX search
+/* 
+var ajax = new XMLHttpRequest();
+ajax.open("GET", "/api/post", true);
+ajax.onload = function() {
+	var list = JSON.parse(ajax.responseText).map(function(i) { return i.name; });
+	new Awesomplete(document.querySelector("#ajax-example input"),{ list: list });
+};
+ajax.send();
+*/
