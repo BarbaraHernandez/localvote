@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(favicon(__dirname + "/favicon.ico"));
-
+/*
 // Passport
 authInit(passport);
 authFacebookStrategy(passport);
