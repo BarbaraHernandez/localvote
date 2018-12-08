@@ -3,9 +3,9 @@
 ## Live Demo: 
 
 ## Project Description (MVP)
- - This application allows users to write new policies and share them with others.
- - This application allows users to read the policies that have been published and vote to agree or disagree.
- - This application requests that users sign in to publish new policies or vote.
+ - This application will allow users to write new policies and share them with others.
+ - This application will allow users to read the policies that have been published and vote to agree or disagree.
+ - This application will require that users sign in to publish new policies or vote.
 
 ## Feature Requests
 - Authentication to ensure the users are local residents.
