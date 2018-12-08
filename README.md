@@ -3,12 +3,13 @@
 ## Live Demo: 
 
 ## Project Description (MVP)
- - This application will allow users to create their idea of policy as a local resident and share with others.
- - This application will allow users to read the policies been published and vote to agree or disagree.
- - This application will request users sign in to publish new policies or vote.
+ - This application allows users to write new policies and share them with others.
+ - This application allows users to read the policies that have been published and vote to agree or disagree.
+ - This application requests that users sign in to publish new policies or vote.
 
 ## Feature Requests
-- Users could use different sorting to reach the topic they are interested in.
+- Authentication to ensure the users are local residents.
+- Users could use sorting tools to reach the topic they are interested in.
 - System would generate monthly top supported topic and email it to local government.
 
 ## Technologies Used
