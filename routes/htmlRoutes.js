@@ -1,6 +1,17 @@
 var db = require("../models");
 
 module.exports = function(app) {
+  // Load index page
+  // app.get("/", function(req, res) {
+  //   db.posts.findAll({}).then(function(examplePost) {
+  //     res.render("main", {
+  //       navbar: "nav",
+  //       msg: "Welcome!",
+  //       examples: examplePost
+  //     });
+  //   });
+  // });
+
   app.get("/", function(req, res) {
     res.render("index");
   });
@@ -26,6 +37,10 @@ module.exports = function(app) {
     res.render("submission");
   });
 
+  app.get("/policies", function(req, res) {
+    res.render("policies");
+  });
+
   app.get("/signin", function(req, res) {
     res.render("signin");
   });
@@ -38,7 +53,7 @@ module.exports = function(app) {
     res.render("policydetail");
   });
 
-  //Render 404 page for any unmatched routes
+  // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
   });
