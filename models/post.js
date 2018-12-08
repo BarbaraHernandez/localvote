@@ -12,10 +12,6 @@ module.exports = function(sequelize, DataTypes) {
     policyDetail: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
     }
   });
 
