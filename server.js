@@ -25,6 +25,7 @@ app.use(favicon(__dirname + "/favicon.ico"));
 authInit(passport);
 authFacebookStrategy(passport);
 app.use(passport.initialize());
+
 app.use(
   session({
     secret: "votes",
@@ -46,9 +47,8 @@ app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/htmlRoutes.js")(app);
-require("./routes/post-api.js")(app);
-require("./routes/account-api.js")(app);
 require("./routes/apiRoutes.js")(app);
+require("./routes/account-api.js")(app);
 
 var syncOptions = { force: false };
 
