@@ -3,8 +3,10 @@ $(document).ready(function() {
   var titleInput = $("#submitTitle");
   var topicInput = $("#selectTopic");
   var form = $("#newPolicy");
+
   //default value of topic
   topicInput.val("General");
+
   //event listener
   $(form).on("submit", function handleSubmit(event) {
     event.preventDefault();
@@ -13,9 +15,8 @@ $(document).ready(function() {
     }
     var newPolicy = {
       title: titleInput.val().trim(),
-      category: topicInput.val().trim(),
-      policyDetail: detailInput.val().trim()
-      //not sure if I need to pass in time for timestamp
+      policyDetail: detailInput.val().trim(),
+      category: topicInput.val().trim()
     };
 
     console.log("New Policy: " + newPolicy);
@@ -24,7 +25,7 @@ $(document).ready(function() {
   });
 
   function submitPolicy(Policy) {
-    $.post("/api/posts", Policy, function() {
+    $.post("/api/post", Policy, function() {
       window.location.href = "/policies";
     });
   }
