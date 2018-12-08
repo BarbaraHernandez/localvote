@@ -30,6 +30,17 @@ module.exports = function(app) {
   });
 
   app.get("/policies", function(req, res) {
+    /*
+    db.Account.findOne({
+      where: {
+        accountId: req.user.id
+      }
+    }).then(dbAccount => {
+      // if users does not exist, set logged in to false
+      // look up user
+      // 
+    })
+    */
     res.render("policies");
   });
 

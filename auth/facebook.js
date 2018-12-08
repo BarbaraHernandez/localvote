@@ -1,7 +1,7 @@
-var db = require("../models");
-var FacebookStrategy = require("passport-facebook").Strategy;
+const db = require("../models");
+const FacebookStrategy = require("passport-facebook").Strategy;
 
-module.exports = function(passport) {
+module.exports = passport => {
   passport.use(
     new FacebookStrategy(
       {
@@ -11,28 +11,23 @@ module.exports = function(passport) {
         enableProof: true,
         profileFields: ["id", "first_name", "last_name", "location"]
       },
-      function(accessToken, refreshToken, profile, done) {
+      (accessToken, refreshToken, profile, done) => {
         console.log("Facebook Strategy");
-        db.Account.findAll({
+        db.Account.findOrCreate({
           where: {
             accountId: profile.id
+          },
+          defaults: {
+            accountId: profile.id,
+            firstName: "Test"
           }
         })
-          // eslint-disable-next-line no-unused-vars
-          .then((dbAccount, err) => {
-            console.log(dbAccount);
-            if (dbAccount) {
-              console.log(dbAccount);
-              done(null, dbAccount);
-            } else {
-              db.Account.create({
-                accountId: profile.id,
-                firstName: displayName
-              }).then(function(dbAccount) {
-                console.log(dbAccount);
-                done(null, dbAccount);
-              });
-            }
+          .spread((dbAccount, created) => {
+            var user = dbAccount.get({
+              plain: true
+            });
+            console.log("New user: " + created);
+            done(null, user);
           })
           .catch(err => {
             console.log(err);

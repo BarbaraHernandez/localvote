@@ -99,12 +99,20 @@ $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 // AJAX search
-/* 
-var ajax = new XMLHttpRequest();
-ajax.open("GET", "/api/post", true);
-ajax.onload = function() {
-	var list = JSON.parse(ajax.responseText).map(function(i) { return i.name; });
-	new Awesomplete(document.querySelector("#ajax-example input"),{ list: list });
-};
-ajax.send();
-*/
+$('#autocomplete').autocomplete({
+  lookup: function (query, done) {
+      serviceUrl: '/autocomplete/countries',
+      var result = {
+          suggestions: [
+              { "value": "United Arab Emirates", "data": "AE" },
+              { "value": "United Kingdom",       "data": "UK" },
+              { "value": "United States",        "data": "US" }
+          ]
+      };
+
+      done(result);
+  },
+  onSelect: function (suggestion) {
+      alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+  }
+});

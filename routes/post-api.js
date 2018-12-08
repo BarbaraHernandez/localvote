@@ -19,6 +19,14 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/posts/:category", function(req, res) {
+    db.Post.findAll({
+      where: { category: req.params.category }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
   // Get all posts created by certain account using the account id
   app.get("/api/accounts/:id", function(req, res) {
     db.post

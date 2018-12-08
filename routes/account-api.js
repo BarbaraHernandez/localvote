@@ -14,4 +14,18 @@ module.exports = function(app) {
         console.log("error", error);
       });
   });
+  app.get("/api/account", function(req, res) {
+    // Create a new account from the signup form
+    db.Account.findOne({
+      where: {
+        accountId: req.user.id
+      }
+    })
+      .then(dbAccount => {
+        res.json(dbAccount);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
+  });
 };
