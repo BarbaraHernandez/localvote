@@ -42,17 +42,10 @@ module.exports = function(app) {
     });
   });
 
-  // POST route for saving a new post
-  app.post("/api/posts", function(req, res) {
-    db.Post.create(req.body).then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
-
   // Create a new post from the submission
   app.post("/api/post", function(req, res) {
     db.Post.create({
-      title: req.body.post,
+      title: req.body.title,
       policyDetail: req.body.policyDetail,
       category: req.body.category,
       AccountId: req.body.accountId

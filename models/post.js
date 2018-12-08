@@ -5,16 +5,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     policyDetail: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    createdAt: {
-      type: DataTypes.DATE,
+    category: {
+      type: DataTypes.STRING,
       allowNull: false
     }
   });
