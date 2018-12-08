@@ -1,24 +1,46 @@
 {{> header}}
 {{> nav2}}
 
+
+<div class="col-xs-12" style="height:50px;"></div>
+
 <div class="row">
     <div class="col">
     </div>
     <div class="col-10">
-
-
-<div class="container">
-  <div>
-    <h1>Create A Policy</h1>
+       
+<div class="card">
+  <div class="card-header">
+    Create a Policy
   </div>
- 
-    <form>
+  <div class="card-body">
+    <h5 class="card-title">Post to LocalVote</h5>
+    <p class="card-text">    <form>
         <label for="exampleFormControlTextarea1">Title</label>
         <textarea class="form-control" id="submitTitle" rows="1"></textarea>
 
         <label for="exampleFormControlTextarea1">Description</label>
-        <textarea class="form-control" id="submitDescription" rows="7"></textarea>
+        <textarea class="form-control" id="submitDescription" rows="7"></textarea></p>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
+  </div>
+</div>
+
+
+{{!-- <div class="container">
+  <div>
+    <h1>Create A Policy</h1>
+  </div> --}}
+ 
+    {{!-- <form>
+        <label for="exampleFormControlTextarea1">Title</label>
+        <textarea class="form-control" id="submitTitle" rows="1"></textarea>
+
+        <label for="exampleFormControlTextarea1">Description</label>
+        <textarea class="form-control" id="submitDescription" rows="7"></textarea> --}}
+{{!-- 
              <div class="form-group">
                 <label for="exampleSelect1">Select Topic</label>
                 <select class="form-control" id="exampleSelect1">
@@ -28,16 +50,19 @@
                 <option>Schools</option>
                 <option>Other</option>
                 </select>
-            </div>
+            </div> --}}
 
-        <label for="exampleFormControlTextarea1">Tags</label>
-        <textarea class="form-control" id="tags" rows="1"></textarea>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+        {{!-- <label for="exampleFormControlTextarea1">Tags</label>
+        <textarea class="form-control" id="tags" rows="1"></textarea> --}}
+        {{!-- <button type="submit" class="btn btn-primary">Submit</button>
+    </form> --}}
+{{!-- </div> --}}
 
 </div>
     <div class="col">
     </div>
   </div>
 </div>
+
+
+<div class="col-xs-12" style="height:50px;"></div>
