@@ -51,7 +51,7 @@ require("./routes/htmlRoutes.js")(app);
 require("./routes/apiRoutes.js")(app);
 require("./routes/account-api.js")(app);
 
-var syncOptions = { force: true };
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
