@@ -1,9 +1,6 @@
 var passport = require("passport");
 
 module.exports = function(app) {
-<<<<<<< HEAD
-  console.log("Seting up routes...");
-=======
   // Routes
   // =============================================================
   // GET route for getting all of the posts
@@ -106,7 +103,6 @@ module.exports = function(app) {
   });
 
   //Authentication
->>>>>>> master
   app.get(
     "/auth/facebook",
     passport.authenticate("facebook", {

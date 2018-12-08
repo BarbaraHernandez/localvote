@@ -26,6 +26,15 @@ $(document).ready(function() {
   $(voteForm).on("submit", function handleVote(event) {
     event.preventDefault();
 
+    $.ajax({
+      method: "GET",
+      url: "/api/account",
+      data: get
+    }).then(function(data) {
+      console.log(data);
+    });
+
+    /*
     //determine vote
     if (yesVote === 1 || noVote === 0) {
       voteVal = true;
@@ -45,6 +54,7 @@ $(document).ready(function() {
     } else {
       return err("Sorry, you are not eligible to vote.");
     }
+    */
   });
 
   function verifyRecord(policyId, voterId) {
