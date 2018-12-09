@@ -72,7 +72,9 @@ module.exports = function(app) {
     });
   });
 
+  //=====================================
   //vote routes
+  //=====================================
   // search for all votes
   app.get("/votes", function(req, res) {
     db.Count.findAll().then(function(dbResult) {
@@ -95,11 +97,18 @@ module.exports = function(app) {
       });
   });
 
-  // POST route for saving a new post
+  // POST route for saving a new vote record
   app.post("/api/votes", function(req, res) {
-    db.Vote.create(req.body).then(function(dbInput) {
-      res.json(dbInput);
-    });
+    db.Vote.create({
+      postID: req.body.postID,
+      choice: req.body.choice
+    })
+      .then(function(dbInput) {
+        res.json(dbInput);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
   });
 
   //Authentication
