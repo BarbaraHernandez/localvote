@@ -8,6 +8,7 @@ module.exports = function(passport) {
 
   passport.deserializeUser(function(id, done) {
     console.log("Deseralize User");
+    console.log(id);
     db.Account.findOne({
       where: {
         accountId: id

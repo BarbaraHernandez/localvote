@@ -1,11 +1,29 @@
+var db = require("../models");
 var passport = require("passport");
 
 module.exports = function(app) {
   // Routes
   // =============================================================
-  // GET route for getting all of the posts
+  // Get all of the posts
   app.get("/post", function(req, res) {
     db.Post.findAll().then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // Get all of the posts related to a search term
+  app.get("/api/search/:term", function(req, res) {
+    db.Post.findAll({
+      where: {
+        $or: [
+          {
+            title: req.params.term,
+            policyDetail: req.params.term
+          }
+        ]
+      }
+    }).then(function(dbPost) {
+      console.log(dbPost);
       res.json(dbPost);
     });
   });
@@ -72,36 +90,6 @@ module.exports = function(app) {
     });
   });
 
-  //vote routes
-  // search for all votes
-  app.get("/votes", function(req, res) {
-    db.Count.findAll().then(function(dbResult) {
-      res.json(dbResult);
-    });
-  });
-
-  // GET(find) one vote record by policy and user id
-  app.get("/api/votes/:policy/:account", function(req, res) {
-    db.post
-      .findOne({
-        where: {
-          postID: reqparams.policy,
-          accountID: reqparams.account
-        }
-      })
-      .then(function(dbResult) {
-        console.log("data", dbResult);
-        res.json(dbResult);
-      });
-  });
-
-  // POST route for saving a new post
-  app.post("/api/votes", function(req, res) {
-    db.Vote.create(req.body).then(function(dbInput) {
-      res.json(dbInput);
-    });
-  });
-
   //Authentication
   app.get(
     "/auth/facebook",
@@ -122,6 +110,7 @@ module.exports = function(app) {
     }),
     (req, res) => {
       // req.session.user = req.user;
+      console.log(req.user);
       res.redirect("/");
     }
   );

@@ -23,14 +23,19 @@ $(document).ready(function() {
   var noVote = $("#noVote").val();
 
   //event listener
-  $(voteForm).on("submit", function handleVote(event) {
+  $("#voteForm").on("submit", event => {
+    console.log("submission");
     event.preventDefault();
+    console.log("prevent default");
 
     $.ajax({
       method: "GET",
       url: "/api/account",
-      data: get
+      xhrFields: {
+        withCredentials: true
+      }
     }).then(function(data) {
+      consolge.log("response");
       console.log(data);
     });
 
