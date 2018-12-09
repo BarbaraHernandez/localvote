@@ -1,7 +1,7 @@
-var User = require("../models/account");
-var FacebookStrategy = require("passport-facebook").Strategy;
+const db = require("../models");
+const FacebookStrategy = require("passport-facebook").Strategy;
 
-module.exports = function(passport) {
+module.exports = passport => {
   passport.use(
     new FacebookStrategy(
       {
@@ -11,10 +11,27 @@ module.exports = function(passport) {
         enableProof: true,
         profileFields: ["id", "first_name", "last_name", "location"]
       },
-      function(accessToken, refreshToken, profile, cb) {
-        User.findOrCreate({ facebookId: profile.id }, function(err, user) {
-          return cb(err, user);
-        });
+      (accessToken, refreshToken, profile, done) => {
+        console.log("Facebook Strategy");
+        db.Account.findOrCreate({
+          where: {
+            accountId: profile.id
+          },
+          defaults: {
+            accountId: profile.id,
+            firstName: "Test"
+          }
+        })
+          .spread((dbAccount, created) => {
+            var user = dbAccount.get({
+              plain: true
+            });
+            console.log("New user: " + created);
+            done(null, user);
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     )
   );

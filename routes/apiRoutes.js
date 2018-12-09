@@ -1,9 +1,4 @@
-var db = require("../models");
-var passport = require("passport"),
-  // eslint-disable-next-line no-unused-vars
-  FacebookStrategy = require("passport-facebook").Strategy;
-
-require("../auth/facebook");
+var passport = require("passport");
 
 module.exports = function(app) {
   // Routes
@@ -26,17 +21,15 @@ module.exports = function(app) {
 
   // Get all posts created by certain account using the account id
   app.get("/api/accounts/:id", function(req, res) {
-    db.post
-      .findAll({ where: { accountID: reqparams.id } })
-      .then(function(dbPost) {
-        console.log("data", dbPost);
-        res.render("policies", { posts: data });
-      });
+    db.Post.findAll({ where: { accountID: reqparams.id } }).then(function(dbPost) {
+      console.log("data", dbPost);
+      res.render("policies", { posts: data });
+    });
   });
 
   // Get one posts detail by post id
   app.get("/api/posts/:id", function(req, res) {
-    db.post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
+    db.Post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
       console.log("data", dbPost);
       res.render("policydetail", { posts: data });
     });
@@ -68,13 +61,55 @@ module.exports = function(app) {
 
   // PUT route for updating posts
   app.put("/api/posts", function(req, res) {
-    db.Post.update(req.body, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbPost) {
-      res.json(dbPost);
+    db.post
+      .update(req.body, {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
+  //=====================================
+  //vote routes
+  //=====================================
+  // search for all votes
+  app.get("/votes", function(req, res) {
+    db.Count.findAll().then(function(dbResult) {
+      res.json(dbResult);
     });
+  });
+
+  // GET(find) one vote record by policy and user id
+  app.get("/api/votes/:policy/:account", function(req, res) {
+    db.count
+      .findOne({
+        where: {
+          postId: reqparams.policy,
+          accountId: reqparams.account
+        }
+      })
+      .then(function(dbResult) {
+        console.log("data", dbResult);
+        res.json(dbResult);
+      });
+  });
+
+  // POST route for saving a new vote record
+  app.post("/api/votes", function(req, res) {
+    db.count
+      .create({
+        postId: req.body.postId,
+        choice: req.body.choice
+      })
+      .then(function(dbInput) {
+        res.json(dbInput);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
   });
 
   //Authentication
@@ -83,16 +118,21 @@ module.exports = function(app) {
     passport.authenticate("facebook", {
       authType: "rerequest",
       scope: "user_location"
-    })
+    }),
+    // eslint-disable-next-line no-unused-vars
+    (req, res) => {
+      console.log("Sign in sucessful!");
+    }
   );
 
   app.get(
     "/auth/facebook/callback",
-    passport.authenticate("facebook", { failureRedirect: "/signin" }),
-    function(req, res) {
-      // Successful authentication, redirect home.
+    passport.authenticate("facebook", {
+      failureRedirect: "/signin"
+    }),
+    (req, res) => {
+      // req.session.user = req.user;
       res.redirect("/");
     }
   );
 };
-

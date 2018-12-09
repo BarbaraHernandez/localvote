@@ -6,11 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    accountCookie: {
-      type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     accountId: {
       type: DataTypes.STRING,
