@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Count = sequelize.define("Count", {
     postId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     // accountId: {

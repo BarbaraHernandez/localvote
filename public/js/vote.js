@@ -1,11 +1,10 @@
 $(document).ready(function() {
-  console.log("js loaded");
-
   var url = window.location.search;
   var policyId = 00000;
   var voteVal;
   // var voterId = "000000";
   // var eligible = false;
+
   //get and set policy id
   if (url.indexOf("?policy=") !== -1) {
     policyId = url.split("=")[1];
@@ -19,16 +18,13 @@ $(document).ready(function() {
   //eligible = true;
   //}
 
-  //capturing vote variables
-  var voteForm = $("#voteForm");
-  var yesVote = $("#yesVote").val();
-  var noVote = $("#noVote").val();
-
   //event listener
-  $(voteForm).on("submit", function handleVote(event) {
+  $("#voteForm").on("submit", function handleVote(event) {
     event.preventDefault();
 
-    console.log("event prevent default");
+    voteVal = $("input:checked").val();
+
+    console.log("Vote: " + voteVal);
 
     //get account info--not in use
     // $.ajax({
@@ -38,22 +34,6 @@ $(document).ready(function() {
     //   console.log("then function");
     //   console.log(data);
     // });
-
-    //determine vote
-    if (yesVote === 1 || noVote === 0) {
-      voteVal = true;
-    } else if (noVote === 1) {
-      voteVal = false;
-    }
-
-    var newVote = {
-      postId: policyId,
-      // accountId: voterId,
-      choice: voteVal
-    };
-
-    console.log("New vote: " + newVote);
-
     //validate for user has not voted --not in use
     // if ((eligible = true)) {
     //   verifyRecord(policyId, voterId);
@@ -61,11 +41,28 @@ $(document).ready(function() {
     //   return err("Sorry, you are not eligible to vote.");
     // }
 
-    submitVote(newVote);
+    //determine vote
+    if (voteVal === "1") {
+      var choice = 1;
+      var newVote = {
+        postId: policyId,
+        // accountId: voterId,
+        choice: choice
+      };
+      submitVote(newVote);
+    } else if (voteVal === "0") {
+      var newVote = {
+        postId: policyId,
+        // accountId: voterId,
+        choice: choice
+      };
+      var choice = 0;
+      submitVote(newVote);
+    }
   });
 
-  function submitVote(Vote) {
-    $.post("/api/votes", Vote, function() {
+  function submitVote(newVote) {
+    $.post("/api/votes", newVote, function() {
       window.location.href = "/policies";
     });
   }
