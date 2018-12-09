@@ -1,11 +1,10 @@
 $(document).ready(function() {
-  console.log("js loaded");
-
   var url = window.location.search;
   var policyId = 00000;
   var voteVal;
   // var voterId = "000000";
   // var eligible = false;
+
   //get and set policy id
   if (url.indexOf("?policy=") !== -1) {
     policyId = url.split("=")[1];
@@ -19,16 +18,11 @@ $(document).ready(function() {
   //eligible = true;
   //}
 
-  //capturing vote variables
-  // var voteForm = $("#voteForm");
-  
   //event listener
   $("#voteForm").on("submit", function handleVote(event) {
     event.preventDefault();
 
-    console.log("event prevent default");
-
-    var voteVal = $("input:checked").val();
+    voteVal = $("input:checked").val();
 
     console.log("Vote: " + voteVal);
 
@@ -40,29 +34,31 @@ $(document).ready(function() {
     //   console.log("then function");
     //   console.log(data);
     // });
-
-    var newVote = {
-      postId: policyId,
-      // accountId: voterId,
-      choice: choice
-    };
-
-    //determine vote
-    if (voteVal === 1) {
-      var choice = true;
-      console.log("choice = " + choice);
-      submitVote(newVote);
-    } else if (voteVal === 0) {
-      var choice = false;
-      submitVote(newVote);
-    }
-
     //validate for user has not voted --not in use
     // if ((eligible = true)) {
     //   verifyRecord(policyId, voterId);
     // } else {
     //   return err("Sorry, you are not eligible to vote.");
     // }
+
+    //determine vote
+    if (voteVal === "1") {
+      var choice = 1;
+      var newVote = {
+        postId: policyId,
+        // accountId: voterId,
+        choice: choice
+      };
+      submitVote(newVote);
+    } else if (voteVal === "0") {
+      var newVote = {
+        postId: policyId,
+        // accountId: voterId,
+        choice: choice
+      };
+      var choice = 0;
+      submitVote(newVote);
+    }
   });
 
   function submitVote(newVote) {
