@@ -21,17 +21,15 @@ module.exports = function(app) {
 
   // Get all posts created by certain account using the account id
   app.get("/api/accounts/:id", function(req, res) {
-    db.post
-      .findAll({ where: { accountID: reqparams.id } })
-      .then(function(dbPost) {
-        console.log("data", dbPost);
-        res.render("policies", { posts: data });
-      });
+    db.Post.findAll({ where: { accountID: reqparams.id } }).then(function(dbPost) {
+      console.log("data", dbPost);
+      res.render("policies", { posts: data });
+    });
   });
 
   // Get one posts detail by post id
   app.get("/api/posts/:id", function(req, res) {
-    db.post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
+    db.Post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
       console.log("data", dbPost);
       res.render("policydetail", { posts: data });
     });
@@ -63,13 +61,15 @@ module.exports = function(app) {
 
   // PUT route for updating posts
   app.put("/api/posts", function(req, res) {
-    db.Post.update(req.body, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+    db.post
+      .update(req.body, {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
   });
 
   //=====================================
@@ -84,11 +84,11 @@ module.exports = function(app) {
 
   // GET(find) one vote record by policy and user id
   app.get("/api/votes/:policy/:account", function(req, res) {
-    db.post
+    db.count
       .findOne({
         where: {
-          postID: reqparams.policy,
-          accountID: reqparams.account
+          postId: reqparams.policy,
+          accountId: reqparams.account
         }
       })
       .then(function(dbResult) {
@@ -99,10 +99,11 @@ module.exports = function(app) {
 
   // POST route for saving a new vote record
   app.post("/api/votes", function(req, res) {
-    db.Vote.create({
-      postID: req.body.postID,
-      choice: req.body.choice
-    })
+    db.count
+      .create({
+        postId: req.body.postId,
+        choice: req.body.choice
+      })
       .then(function(dbInput) {
         res.json(dbInput);
       })
