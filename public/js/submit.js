@@ -27,7 +27,9 @@ $(document).ready(function() {
   });
 
   function submitPolicy(Policy) {
+    console.log("attempting to send to database");
     $.post("/api/post", Policy, function() {
+      console.log("made post request");
       window.location.href = "/policies";
     });
   }

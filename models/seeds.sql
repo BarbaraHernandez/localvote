@@ -9,3 +9,12 @@ CREATE TABLE posts(
     updatedAt datetime,
     PRIMARY KEY(id)
 );
+
+CREATE TABLE counts(
+    id INT NOT NULL AUTO_INCREMENT,
+    postId INT NOT NULL,
+    choice TINYINT(1) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    updatedAt DATETIME NOT NULL,
+    PRIMARY KEY(id)
+);

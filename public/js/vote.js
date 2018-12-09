@@ -20,15 +20,17 @@ $(document).ready(function() {
   //}
 
   //capturing vote variables
-  var voteForm = $("#voteForm");
-  var yesVote = $("#yesVote").val();
-  var noVote = $("#noVote").val();
-
+  // var voteForm = $("#voteForm");
+  
   //event listener
-  $(voteForm).on("submit", function handleVote(event) {
+  $("#voteForm").on("submit", function handleVote(event) {
     event.preventDefault();
 
     console.log("event prevent default");
+
+    var voteVal = $("input:checked").val();
+
+    console.log("Vote: " + voteVal);
 
     //get account info--not in use
     // $.ajax({
@@ -39,20 +41,21 @@ $(document).ready(function() {
     //   console.log(data);
     // });
 
-    //determine vote
-    if (yesVote === 1 || noVote === 0) {
-      voteVal = true;
-    } else if (noVote === 1) {
-      voteVal = false;
-    }
-
     var newVote = {
       postId: policyId,
       // accountId: voterId,
-      choice: voteVal
+      choice: choice
     };
 
-    console.log("New vote: " + newVote);
+    //determine vote
+    if (voteVal === 1) {
+      var choice = true;
+      console.log("choice = " + choice);
+      submitVote(newVote);
+    } else if (voteVal === 0) {
+      var choice = false;
+      submitVote(newVote);
+    }
 
     //validate for user has not voted --not in use
     // if ((eligible = true)) {
@@ -60,12 +63,10 @@ $(document).ready(function() {
     // } else {
     //   return err("Sorry, you are not eligible to vote.");
     // }
-
-    submitVote(newVote);
   });
 
-  function submitVote(Vote) {
-    $.post("/api/votes", Vote, function() {
+  function submitVote(newVote) {
+    $.post("/api/votes", newVote, function() {
       window.location.href = "/policies";
     });
   }
