@@ -2,6 +2,9 @@ var db = require("../models");
 var passport = require("passport");
 
 module.exports = function(app) {
+  //============================
+  //Policy routes
+  //============================
   // Get all of the posts related to a search term
   app.get("/api/search/:term", function(req, res) {
     var term = "%" + req.params.term + "%";
@@ -34,14 +37,24 @@ module.exports = function(app) {
     });
   });
 
+  //Get most recent post
+  app.get("/api/posts/latest", function(req, res) {
+    db.Post.findAll({
+      limit: 1,
+      order: [["createdAt", "DESC"]]
+    }).then(function(dbPost) {
+      res.render("index", { policy: dbPost });
+    });
+  });
+
   // Post submission
   app.post("/api/post", function(req, res) {
     console.log("api route accessed");
     db.Post.create({
       title: req.body.title,
       policyDetail: req.body.policyDetail,
-      category: req.body.category,
-      AccountId: req.body.accountId
+      category: req.body.category //,
+      // AccountId: req.body.accountId
     })
       .then(function(dbPost) {
         console.log("data", dbPost);
@@ -51,6 +64,10 @@ module.exports = function(app) {
         console.log("error", error);
       });
   });
+
+  //============================
+  //Vote routes
+  //============================
 
   // Get vote record by policy and user id
   app.get("/api/votes/:policy/:account", function(req, res) {
@@ -81,6 +98,9 @@ module.exports = function(app) {
       });
   });
 
+  //============================
+  //Authentication routes
+  //============================
   // Authenticate user
   app.get(
     "/auth/facebook",
