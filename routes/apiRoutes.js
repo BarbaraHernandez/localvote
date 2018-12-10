@@ -2,20 +2,19 @@ var db = require("../models");
 var passport = require("passport");
 
 module.exports = function(app) {
-  // Routes
-  // =============================================================
-  // GET route for getting all of the posts
-  app.get("/posts", function(req, res) {
-    db.Post.findAll().then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
-
-  // Get all posts of a certain category
-  app.get("/api/posts/:category", function(req, res) {
+  // Get all of the posts related to a search term
+  app.get("/api/search/:term", function(req, res) {
     db.Post.findAll({
-      where: { category: req.params.category }
+      where: {
+        $or: [
+          {
+            title: req.params.term,
+            policyDetail: req.params.term
+          }
+        ]
+      }
     }).then(function(dbPost) {
+      console.log(dbPost);
       res.json(dbPost);
     });
   });
@@ -28,7 +27,7 @@ module.exports = function(app) {
     });
   });
 
-  // Create a new post from the submission
+  // Post submission
   app.post("/api/post", function(req, res) {
     console.log("api route accessed");
     db.Post.create({
@@ -46,17 +45,7 @@ module.exports = function(app) {
       });
   });
 
-  //=====================================
-  //vote routes
-  //=====================================
-  // search for all votes
-  app.get("/votes", function(req, res) {
-    db.Count.findAll().then(function(dbResult) {
-      res.json(dbResult);
-    });
-  });
-
-  // GET(find) one vote record by policy and user id
+  // Get vote record by policy and user id
   app.get("/api/votes/:policy/:account", function(req, res) {
     db.count
       .findOne({
@@ -71,7 +60,7 @@ module.exports = function(app) {
       });
   });
 
-  // POST route for saving a new vote record
+  // Post new vote record
   app.post("/api/votes", function(req, res) {
     db.Count.create({
       postId: req.body.postId,
@@ -85,7 +74,7 @@ module.exports = function(app) {
       });
   });
 
-  //Authentication
+  // Authenticate user
   app.get(
     "/auth/facebook",
     passport.authenticate("facebook", {
@@ -98,6 +87,7 @@ module.exports = function(app) {
     }
   );
 
+  // Verify user is authenticated
   app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
@@ -105,6 +95,7 @@ module.exports = function(app) {
     }),
     (req, res) => {
       // req.session.user = req.user;
+      console.log(req.user);
       res.redirect("/");
     }
   );
