@@ -7,28 +7,35 @@ module.exports = function(app) {
   //============================
   // Get all of the posts related to a search term
   app.get("/api/search/:term", function(req, res) {
+    var term = "%" + req.params.term + "%";
     db.Post.findAll({
       where: {
         $or: [
           {
-            title: req.params.term,
-            policyDetail: req.params.term
+            title: {
+              $like: term
+            },
+            policyDetail: {
+              $like: term
+            }
           }
         ]
       }
     }).then(function(dbPost) {
-      console.log(dbPost);
       res.json(dbPost);
     });
   });
 
   // Get one posts detail by post id
-  // app.get("/api/posts/:id", function(req, res) {
-  //   db.Post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
-  //     console.log("data", dbPost);
-  //     res.render("policydetail", { posts: data });
-  //   });
-  // });
+  app.get("/policy/:id", function(req, res) {
+    db.Post.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbPost) {
+      res.render("policydetail", { policy: dbPost });
+    });
+  });
 
   //Get most recent post
   app.get("/api/posts/latest", function(req, res) {
@@ -37,8 +44,7 @@ module.exports = function(app) {
       order: [["createdAt", "DESC"]]
     }).then(function(dbPost) {
       res.json(dbPost);
-    });
-  });
+  });    
 
   // Post submission
   app.post("/api/post", function(req, res) {
@@ -78,7 +84,7 @@ module.exports = function(app) {
   });
 
   // Post new vote record
-  app.post("/api/votes", function(req, res) {
+  app.post("/api/vote", function(req, res) {
     db.Count.create({
       postId: req.body.postId,
       choice: req.body.choice
@@ -119,4 +125,22 @@ module.exports = function(app) {
       res.redirect("/");
     }
   );
+
+  app.get("/api/account", function(req, res) {
+    // Create a new account from the signup form
+    console.log(req);
+    console.log(req.user);
+    console.log(req.user.id);
+    db.Account.findOne({
+      where: {
+        accountId: req.user.id
+      }
+    })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
+  });
 };
