@@ -4,49 +4,47 @@
 <div class="col-xs-12" style="height:50px;"></div>
 
 <div class="row">
-    <div class="col">
-    </div>
-    <div class="col-8">
-
-<div class="card">
-    <h5 class="card-header">Policy Proposal</h5>
-    <div class="card-body">
-      <h5 class="card-title">Lorem Ipsum</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Vestibulum eleifend libero a tristique lacinia. Donec non metus tortor. 
-        Phasellus justo tortor, consectetur molestie augue at, elementum varius justo. 
-        Aenean ac ante enim. </p>
-        <form id="voteForm">
-        <fieldset class="form-group">
-          <!-- <legend>Radio buttons</legend> -->
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optionsRadios" id="yesVote" value="1" checked>
-              Yes
-            </label>
-          </div>
-          <div class="form-check">
-          <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optionsRadios" id="noVote" value="0">
-              No
-            </label>
-          </div>
-        </fieldset>
-        <div>
-        <button id="submit-vote" type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
-        </div>
-      </form>
-    </div>
-</div>
-
-
-
-</div>
-    <div class="col">
-    </div>
+  <div class="col">
   </div>
+  <div class="col-8">
+
+    <div class="card">
+      <h5 class="card-header">Policy Proposal</h5>
+      <div class="card-body">
+        {{#if policy}}
+        <h5 class="card-title">{{policy.title}}</h5>
+        <p class="card-text">{{policy.policyDetail}}</p>
+        <form id="voteForm">
+          <fieldset class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optionsRadios" id="yesVote" value="1" checked>
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optionsRadios" id="noVote" value="0">
+                No
+              </label>
+            </div>
+          </fieldset>
+          <div>
+            <button id="submit-vote" type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
+          </div>
+        </form>
+        {{else}}
+        <h5 class="card-title">No policy found...</h5>
+        {{/if}}
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="col">
+  </div>
+</div>
 </div>
 
 <div class="col-xs-12" style="height:50px;"></div>
-
-
