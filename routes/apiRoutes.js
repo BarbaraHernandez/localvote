@@ -2,6 +2,9 @@ var db = require("../models");
 var passport = require("passport");
 
 module.exports = function(app) {
+  //============================
+  //Policy routes
+  //============================
   // Get all of the posts related to a search term
   app.get("/api/search/:term", function(req, res) {
     db.Post.findAll({
@@ -27,6 +30,15 @@ module.exports = function(app) {
     });
   });
 
+  //Get most recent post
+  app.get("/api/posts/latest", function(req, res) {
+    db.Post.findOne({
+      order: [sequelize.fn("max", sequelize.col("createdAt"))]
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
   // Post submission
   app.post("/api/post", function(req, res) {
     console.log("api route accessed");
@@ -44,6 +56,10 @@ module.exports = function(app) {
         console.log("error", error);
       });
   });
+
+  //============================
+  //Vote routes
+  //============================
 
   // Get vote record by policy and user id
   app.get("/api/votes/:policy/:account", function(req, res) {
@@ -74,6 +90,9 @@ module.exports = function(app) {
       });
   });
 
+  //============================
+  //Authentication routes
+  //============================
   // Authenticate user
   app.get(
     "/auth/facebook",
