@@ -18,14 +18,14 @@ $(document).ready(function() {
   //display for home page
   function getLastPolicy() {
     $.get("/api/posts/latest", function(data) {
-      console.log("policy: " + JSON.parse(data));
+      console.log("policy: " + JSON.stringify(data));
       displayPolicy(data);
     });
   }
   getLastPolicy();
 
   function displayPolicy(data) {
-    console.log("title: " + data.title);
+    console.log("title: " + JSON.stringify(data.policy.title));
     $("#policy-title").text(data.title);
     $("#policy-text").text(data.policyDetail);
   }
