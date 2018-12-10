@@ -18,13 +18,14 @@ module.exports = function(app) {
     // Create a new account from the signup form
     console.log(req);
     console.log(req.user);
+    console.log(req.user.id);
     db.Account.findOne({
       where: {
         accountId: req.user.id
       }
     })
-      .then(dbAccount => {
-        res.json(dbAccount);
+      .then(data => {
+        res.json(data);
       })
       .catch(function(error) {
         console.log("error", error);

@@ -4,6 +4,8 @@ $(document).ready(function() {
   var topicInput = $("#selectTopic");
   var form = $("#newPolicy");
 
+  console.log("submit.js loaded");
+
   //default value of topic
   topicInput.val("General");
 
@@ -25,7 +27,9 @@ $(document).ready(function() {
   });
 
   function submitPolicy(Policy) {
+    console.log("attempting to send to database");
     $.post("/api/post", Policy, function() {
+      console.log("made post request");
       window.location.href = "/policies";
     });
   }

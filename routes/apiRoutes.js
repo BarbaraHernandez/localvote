@@ -2,15 +2,6 @@ var db = require("../models");
 var passport = require("passport");
 
 module.exports = function(app) {
-  // Routes
-  // =============================================================
-  // Get all of the posts
-  app.get("/post", function(req, res) {
-    db.Post.findAll().then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
-
   // Get all of the posts related to a search term
   app.get("/api/search/:term", function(req, res) {
     db.Post.findAll({
@@ -28,35 +19,17 @@ module.exports = function(app) {
     });
   });
 
-  // Get all posts of a certain category
-  app.get("/api/posts/:category", function(req, res) {
-    db.Post.findAll({
-      where: { category: req.params.category }
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
-
-  // Get all posts created by certain account using the account id
-  app.get("/api/accounts/:id", function(req, res) {
-    db.post
-      .findAll({ where: { accountID: reqparams.id } })
-      .then(function(dbPost) {
-        console.log("data", dbPost);
-        res.render("policies", { posts: data });
-      });
-  });
-
   // Get one posts detail by post id
   app.get("/api/posts/:id", function(req, res) {
-    db.post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
+    db.Post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
       console.log("data", dbPost);
       res.render("policydetail", { posts: data });
     });
   });
 
-  // Create a new post from the submission
+  // Post submission
   app.post("/api/post", function(req, res) {
+    console.log("api route accessed");
     db.Post.create({
       title: req.body.title,
       policyDetail: req.body.policyDetail,
@@ -72,25 +45,36 @@ module.exports = function(app) {
       });
   });
 
-  // DELETE route for deleting posts
-  app.delete("/api/posts/:id", function(req, res) {
-    db.Post.destroy({ where: { id: req.params.id } }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+  // Get vote record by policy and user id
+  app.get("/api/votes/:policy/:account", function(req, res) {
+    db.count
+      .findOne({
+        where: {
+          postId: reqparams.policy,
+          accountId: reqparams.account
+        }
+      })
+      .then(function(dbResult) {
+        console.log("data", dbResult);
+        res.json(dbResult);
+      });
   });
 
-  // PUT route for updating posts
-  app.put("/api/posts", function(req, res) {
-    db.Post.update(req.body, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+  // Post new vote record
+  app.post("/api/votes", function(req, res) {
+    db.Count.create({
+      postId: req.body.postId,
+      choice: req.body.choice
+    })
+      .then(function(dbInput) {
+        res.json(dbInput);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
   });
 
-  //Authentication
+  // Authenticate user
   app.get(
     "/auth/facebook",
     passport.authenticate("facebook", {
@@ -103,6 +87,7 @@ module.exports = function(app) {
     }
   );
 
+  // Verify user is authenticated
   app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
