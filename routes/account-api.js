@@ -16,6 +16,8 @@ module.exports = function(app) {
   });
   app.get("/api/account", function(req, res) {
     // Create a new account from the signup form
+    console.log(req);
+    console.log(req.user);
     console.log(req.user.id);
     db.Account.findOne({
       where: {

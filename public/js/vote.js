@@ -21,6 +21,7 @@ $(document).ready(function() {
   //event listener
   $("#voteForm").on("submit", function handleVote(event) {
     event.preventDefault();
+    console.log("prevent default");
 
     voteVal = $("input:checked").val();
 
