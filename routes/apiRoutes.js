@@ -23,17 +23,18 @@ module.exports = function(app) {
   });
 
   // Get one posts detail by post id
-  app.get("/api/posts/:id", function(req, res) {
-    db.Post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
-      console.log("data", dbPost);
-      res.render("policydetail", { posts: data });
-    });
-  });
+  // app.get("/api/posts/:id", function(req, res) {
+  //   db.Post.findOne({ where: { postID: reqparams.id } }).then(function(dbPost) {
+  //     console.log("data", dbPost);
+  //     res.render("policydetail", { posts: data });
+  //   });
+  // });
 
   //Get most recent post
   app.get("/api/posts/latest", function(req, res) {
-    db.Post.findOne({
-      order: [sequelize.fn("max", sequelize.col("createdAt"))]
+    db.Post.findAll({
+      limit: 1,
+      order: [["createdAt", "DESC"]]
     }).then(function(dbPost) {
       res.json(dbPost);
     });
@@ -45,8 +46,8 @@ module.exports = function(app) {
     db.Post.create({
       title: req.body.title,
       policyDetail: req.body.policyDetail,
-      category: req.body.category,
-      AccountId: req.body.accountId
+      category: req.body.category //,
+      // AccountId: req.body.accountId
     })
       .then(function(dbPost) {
         console.log("data", dbPost);

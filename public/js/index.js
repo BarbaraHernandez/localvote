@@ -14,4 +14,19 @@ $(document).ready(function() {
       });
     }, 500);
   });
+
+  //display for home page
+  function getLastPolicy() {
+    $.get("/api/posts/latest", function(data) {
+      console.log("policy: " + JSON.parse(data));
+      displayPolicy(data);
+    });
+  }
+  getLastPolicy();
+
+  function displayPolicy(data) {
+    console.log("title: " + data.title);
+    $("#policy-title").text(data.title);
+    $("#policy-text").text(data.policyDetail);
+  }
 });
