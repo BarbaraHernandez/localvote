@@ -1,5 +1,9 @@
-a{
+.nav-link {
   color:white;
+}
+
+.nav-link:hover {
+  color: #fdaf40;
 }
 
 .list-group-item {
@@ -13,7 +17,7 @@ a{
   width: 100%;
   height: 60px;
   line-height: 60px; 
-  background-color: darkslategray;
+  background-color: rgb(0, 63, 100);
   }
 
 .radio {
@@ -26,6 +30,7 @@ a{
 
 #lvlogo {
   width: 45px;
+  max-height: 40px;
 }
 
 .jumbotron {
@@ -43,7 +48,7 @@ a{
 
 .container {
   /* width: 60%; */
-  background-color: #fffeee
+  background-color: #ffffff;
 };
 
 /* .vertical-center {
@@ -53,26 +58,12 @@ a{
   align-items: center;
 } */
 
-.front-page-image {
-  display: block; 
-  position: absolute;
-  margin-left: auto; margin-right: auto;
+#front-page-image {
   background-color: #fdaf40;
-  max-width: 100%;
-  border: 0;
-  margin: 0;
-  outline: 0;
-  padding: 0;
-  display: block;
-  overflow: auto;
 } 
 
 #front-page-div {
   background-color: #fdaf40;
-  border: 0;
-  margin: 0;
-  outline: 0;
-  padding: 0;
 }
 
 .topnav {
@@ -83,8 +74,10 @@ body {
   background-color: rgb(194, 194, 194);
 }
 
+.btn-primary,
 .navbar {
-  background-color: rgb(53, 113, 163);
+  background-color: rgb(0, 63, 100);
+  border: none;
 }
 
 #hands-div {
@@ -93,10 +86,11 @@ body {
 
 #hands-image {
   box-flex: center;
+  max-width: 100%;
 }
 
 #brand {
-  background-color:  rgb(53, 113, 163);
+  background-color:  rgb(0, 63, 100);
 }
 
 .sign-form {
