@@ -1,3 +1,7 @@
+a{
+  color:white;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -76,11 +80,11 @@
 }
 
 body {
-  background-color: grey;
+  background-color: rgb(194, 194, 194);
 }
 
 .navbar {
-  background-color: tan;
+  background-color: rgb(53, 113, 163);
 }
 
 #hands-div {
@@ -92,7 +96,7 @@ body {
 }
 
 #brand {
-  background-color: tan;
+  background-color:  rgb(53, 113, 163);
 }
 
 .sign-form {
