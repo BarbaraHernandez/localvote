@@ -63,7 +63,7 @@ $(document).ready(function() {
   });
 
   function submitVote(newVote) {
-    $.post("/api/votes", newVote, function() {
+    $.post("/api/vote", newVote, function() {
       window.location.href = "/policies";
     });
   }
