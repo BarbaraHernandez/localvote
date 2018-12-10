@@ -43,9 +43,9 @@ module.exports = function(app) {
       limit: 1,
       order: [["createdAt", "DESC"]]
     }).then(function(dbPost) {
-      res.json(dbPost);
-  });    
-
+      res.render("index", { policy: dbPost });
+    });
+  });
 
   // Post submission
   app.post("/api/post", function(req, res) {

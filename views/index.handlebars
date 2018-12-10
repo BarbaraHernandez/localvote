@@ -20,31 +20,31 @@
   <div class="card">
     <h5 class="card-header">Recent Policy</h5>
     <div class="card-body">
-      <h5 id="policy-title" class="card-title">Lorem Ipsum</h5>
-      <p id="policy-text" class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Vestibulum eleifend libero a tristique lacinia. Donec non metus tortor. 
-        Phasellus justo tortor, consectetur molestie augue at, elementum varius justo. 
-        Aenean ac ante enim. </p>
-        <form>
-        <fieldset class="form-group">
-          <!-- <legend>Radio buttons</legend> -->
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="1" checked>
-              Yes
-            </label>
+       {{#if policy}}
+        <h5 class="card-title">{{policy.title}}</h5>
+        <p class="card-text">{{policy.policyDetail}}</p>
+        <form id="voteForm">
+          <fieldset class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optionsRadios" id="yesVote" value="1" checked>
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optionsRadios" id="noVote" value="0">
+                No
+              </label>
+            </div>
+          </fieldset>
+          <div>
+            <button id="submit-vote" type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
           </div>
-          <div class="form-check">
-          <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="0">
-              No
-            </label>
-          </div>
-        </fieldset>
-        <div>
-        <button type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
-        </div>
-      </form>
+        </form>
+        {{else}}
+        <h5 class="card-title">No policy found...</h5>
+        {{/if}}
     </div>
 </div>
 
