@@ -1,6 +1,6 @@
 # LocalVote
 
-## Live Demo: 
+## Live Demo: https://local-vote.herokuapp.com/
 
 ## Project Description (MVP)
  - This application will allow users to write new policies and share them with others.
