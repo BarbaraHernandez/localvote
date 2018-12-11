@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== "production") {
 var express = require("express");
 var exphbs = require("express-handlebars");
 var favicon = require("serve-favicon");
+var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var passport = require("passport");
 var db = require("./models");
@@ -18,6 +19,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -26,7 +28,6 @@ app.use(favicon(__dirname + "/favicon.ico"));
 // Passport
 authInit(passport);
 authFacebookStrategy(passport);
-app.use(passport.initialize());
 
 app.use(
   session({
@@ -35,6 +36,7 @@ app.use(
     saveUninitialized: true
   })
 );
+app.use(passport.initialize());
 app.use(passport.session());
 
 // Handlebars

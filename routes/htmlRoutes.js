@@ -1,19 +1,14 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Load index page
-  // app.get("/", function(req, res) {
-  //   db.posts.findAll({}).then(function(examplePost) {
-  //     res.render("main", {
-  //       navbar: "nav",
-  //       msg: "Welcome!",
-  //       examples: examplePost
-  //     });
-  //   });
-  // });
-
+  //Get most recent post
   app.get("/", function(req, res) {
-    res.render("index");
+    db.Post.findAll({
+      limit: 1,
+      order: [["createdAt", "DESC"]]
+    }).then(function(dbPost) {
+      res.render("index", { policy: dbPost });
+    });
   });
 
   app.get("/submission", function(req, res) {
@@ -21,7 +16,13 @@ module.exports = function(app) {
   });
 
   app.get("/policies", function(req, res) {
-    res.render("policies");
+    db.Post.findAll({
+      limit: 10,
+      order: [["createdAt", "DESC"]]
+    }).then(function(dbPost) {
+      console.log(JSON.stringify(dbPost));
+      res.render("policies", { policy: dbPost });
+    });
   });
 
   // Render 404 page for any unmatched routes

@@ -39,16 +39,6 @@ module.exports = function(app) {
     });
   });
 
-  //Get most recent post
-  app.get("/api/posts/latest", function(req, res) {
-    db.Post.findAll({
-      limit: 1,
-      order: [["createdAt", "DESC"]]
-    }).then(function(dbPost) {
-      res.render("index", { policy: dbPost });
-    });
-  });
-
   // Post submission
   app.post("/api/post", function(req, res) {
     console.log("api route accessed");
@@ -129,8 +119,8 @@ module.exports = function(app) {
     }
   );
 
+  // Lookup account
   app.get("/api/account", function(req, res) {
-    // Create a new account from the signup form
     console.log(req);
     console.log(req.user);
     console.log(req.user.id);

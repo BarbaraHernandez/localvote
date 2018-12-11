@@ -5,33 +5,25 @@ $(document).ready(function() {
     console.log("Typing...");
     clearTimeout(timeout);
     timeout = setTimeout(function() {
-      $.ajax({
-        method: "GET",
-        url: "/api/search/" + $("#auto-complete").val()
-      }).then(function(data) {
+      var autoComplete = $("#auto-complete").val();
+      if (autoComplete === "") {
+        console.log("Most Recent");
         $("#search-results").empty();
-        console.log("Empty");
-        for (var i = 0; i < data.length; i++) {
-          $("#search-results").append(
-            "<div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><a href=\"/policy/" +
-              data[i].id +
-              "\">" +
-              data[i].title +
-              "</a></h3></div><div class=\"panel-body\">" +
-              data[i].policyDetail +
-              "</div></div>"
-          );
-        }
-      });
+        $("#most-recent").show();
+      } else {
+        console.log("Else");
+        $.ajax({
+          method: "GET",
+          url: "/api/search/" + autoComplete
+        }).then(function(data) {
+          $("#search-results").empty();
+          $("#most-recent").hide();
+          console.log("Empty");
+          for (var i = 0; i < data.length; i++) {
+            $("#search-results").append('<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title"><a href="/policy/' + data[i].id + '">' + data[i].title + '</a></h3></div><div class="panel-body">' + data[i].policyDetail + '</div></div>');
+          }
+        });
+      }
     }, 500);
   });
-
-  getLastPolicy();
-
-  //display for home page
-  function getLastPolicy() {
-    $.get("/api/posts/latest", function(data) {
-      console.log("policy: queried");
-    });
-  }
 });
