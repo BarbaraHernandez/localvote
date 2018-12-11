@@ -9,30 +9,43 @@
   <div class="col-8">
 
     <div class="card">
-      <h5 class="card-header">Policy Proposal</h5>
+      <h5 class="card-header">Policy Detail</h5>
       <div class="card-body">
         {{#if policy}}
-        <h5 class="card-title">{{policy.title}}</h5>
-        <p class="card-text">{{policy.policyDetail}}</p>
-        <form id="voteForm">
-          <fieldset class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="yesVote" value="1" checked>
-                Yes
-              </label>
+        <h5 class="card-title">{{policy.policy.title}}</h5>
+        <p class="card-text">{{policy.policy.policyDetail}}</p>
+          {{#if policy.voting}}
+          <form id="voteForm" data-id="{{policy.policy.id}}">
+            <fieldset class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optionsRadios" id="yesVote" value="1" checked>
+                  Yes
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optionsRadios" id="noVote" value="0">
+                  No
+                </label>
+              </div>
+            </fieldset>
+            <div>
+              <button id="submit-vote" type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
             </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="noVote" value="0">
-                No
-              </label>
-            </div>
-          </fieldset>
-          <div>
-            <button id="submit-vote" type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
-          </div>
-        </form>
+          </form>
+          {{/if }}
+          {{#if policy.voted}}
+            {{#if policy.vote.choice}}
+              You voted yes!
+            {{/if}}
+            {{#unless policy.vote.choice}}
+              You voted no!
+            {{/unless}}
+          {{/if}}
+          {{#if policy.unauthenticated}}
+            Please sign-in to vote.
+          {{/if}}
         {{else}}
         <h5 class="card-title">No policy found...</h5>
         {{/if}}

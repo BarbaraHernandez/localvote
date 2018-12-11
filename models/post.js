@@ -8,20 +8,18 @@ module.exports = function(sequelize, DataTypes) {
     policyDetail: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
+    } /*,
     category: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    } */
   });
-
-  // Post.associate = function(models) {
-  //   Post.belongsTo(models.Account, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
-
+  Post.associate = function(models) {
+    Post.belongsTo(models.Account, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return Post;
 };

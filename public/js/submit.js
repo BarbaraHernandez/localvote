@@ -1,11 +1,11 @@
 $(document).ready(function() {
   var detailInput = $("#submitDescription");
   var titleInput = $("#submitTitle");
-  var topicInput = $("#selectTopic");
+  // var topicInput = $("#selectTopic");
   var form = $("#newPolicy");
 
-  //default value of topic
-  topicInput.val("General");
+  // default value of topic
+  // topicInput.val("General");
 
   //event listener
   $(form).on("submit", function handleSubmit(event) {
@@ -16,19 +16,17 @@ $(document).ready(function() {
     var newPolicy = {
       title: titleInput.val().trim(),
       policyDetail: detailInput.val().trim(),
-      category: topicInput.val().trim()
+      // category: topicInput.val().trim()
     };
-
-    console.log("New Policy: " + newPolicy);
-
     submitPolicy(newPolicy);
   });
 
+  // ajax call
   function submitPolicy(Policy) {
-    console.log("attempting to send to database");
     $.post("/api/post", Policy, function() {
-      console.log("made post request");
       window.location.href = "/policies";
     });
+    detailInput.val("");
+    titleInput.val("");
   }
 });

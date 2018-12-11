@@ -4,10 +4,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    // accountId: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false
-    // },
+    accountId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     choice: {
       type: DataTypes.BOOLEAN,
       allowNull: false

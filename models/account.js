@@ -13,10 +13,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   });
-  // Account.associate = function(models) {
-  //   Account.hasMany(models.Post, {
-  //     onDelete: "cascade"
-  //   });
-  // };
+  Account.associate = function(models) {
+    Account.hasMany(models.Post, {
+      onDelete: "cascade"
+    });
+  };
   return Account;
 };
