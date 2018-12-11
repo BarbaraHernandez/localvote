@@ -1,25 +1,34 @@
 {{> header2}}
 {{> nav2}}
-<div class="container">    
+<div class="container">
   <div class="col-xs-12" style="height:50px;"></div>
 
   <div class="row">
-    <div class="col-12">    
-    <div class="card">
-      <h5 class="card-header">Policy Proposals</h5>
-      <div class="card-body">
+    <div class="col-12">
+      <div class="card">
+        <h5 class="card-header">Policy Proposals</h5>
+        <div class="card-body">
 
-        <div class="container">
-          <input type="search" class="form-control" id="auto-complete" placeholder="Search">
+          <div class="container">
+            <input type="search" class="form-control" id="auto-complete" placeholder="Search">
+          </div>
+
+          <div class="container" id="search-results">
+          </div>
+
+          <div class="container" id="most-recent">
+            {{#each policy}}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><a href="/policy/{{this.id}}">{{this.title}}</a></h3>
+              </div>
+              <div class="panel-body">{{this.policyDetail}}</div>
+            </div>
+            {{/each}}
+          </div>
+
         </div>
-
-        <div class="container" id="search-results">
-        </div>
-
       </div>
+
     </div>
-    
   </div>
-</div>
-
-

@@ -66,7 +66,24 @@ $(document).ready(function() {
     $.post("/api/vote", newVote, function() {
       window.location.href = "/policies";
     });
+    /*
+    $.ajax({
+      method: "POST",
+      url: "/api/vote",
+      data: newVote,
+      xhrFields: {
+        withCredentials: true
+     }
+    }).then(function(data) {
+      $("#search-results").empty();
+      console.log("Empty");
+      for (var i = 0; i < data.length; i++) {
+        $("#search-results").append('<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title"><a href="/policy/' + data[i].id + '">' + data[i].title + '</a></h3></div><div class="panel-body">' + data[i].policyDetail + '</div></div>');
+      }
+    });
+    */
   }
+
   // function verifyRecord(policyId, voterId) {
   //   $.get("/api/votes/" + policyId + "/" + voterId, function(err, data) {
   //     if (data) {
