@@ -14,11 +14,11 @@ $(document).ready(function() {
       };
       submitVote(newVote);
     } else if (voteVal === "0") {
+      var choice = 0;
       var newVote = {
         postId: policyId,
         choice: choice
       };
-      var choice = 0;
       submitVote(newVote);
     }
   });
