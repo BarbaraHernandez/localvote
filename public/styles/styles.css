@@ -1,3 +1,19 @@
+/* General html elements */
+p, 
+h1,
+h2,
+h3,
+h4,
+label, 
+button {
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+body {
+  background-color: rgb(194, 194, 194);
+}
+
+/* Navigation */
 .nav-link {
   color:white;
 }
@@ -6,10 +22,18 @@
   color: #fdaf40;
 }
 
-.list-group-item {
-  line-height: 2.5;
+#lvlogo {
+  width: 45px;
+  max-height: 40px;
 }
 
+.btn-primary,
+.navbar {
+  background-color: rgb(0, 63, 100);
+  border: none;
+}
+
+/*Footer*/
 .footer {
   position: fixed;
   bottom: 0;
@@ -18,70 +42,10 @@
   height: 60px;
   line-height: 60px; 
   background-color: rgb(0, 63, 100);
-  }
-
-.radio {
-  display: block;
 }
 
-.container {
-  background-color: #e4ecef;
-}
-
-#lvlogo {
-  width: 45px;
-  max-height: 40px;
-}
-
-.jumbotron {
-  /* width: 70%; */
-  align-content: center;
-  background-color: #fffeee;
-}
-
-
-/* textarea {
-  display: block;
-    margin-left: auto;
-    margin-right: auto;
-} */
-
-.container {
-  /* width: 60%; */
-  background-color: #ffffff;
-  margin-top: 2em;
-  margin-bottom: 5.5em;
-  border-radius: 5px;
-};
-
-
-/* .vertical-center {
-  min-height: 100%;  
-  min-height: 100vh; 
-  display: flex;
-  align-items: center;
-} */
-
-#front-page-image {
-  background-color: #fdaf40;
-} 
-
-#front-page-div {
-  background-color: #fdaf40;
-}
-
-.topnav {
-  float: right;
-}
-
-body {
-  background-color: rgb(194, 194, 194);
-}
-
-.btn-primary,
-.navbar {
-  background-color: rgb(0, 63, 100);
-  border: none;
+.footer-copyright {
+  color: white;
 }
 
 #hands-div {
@@ -94,10 +58,27 @@ body {
   max-width: 100%;
 }
 
-#brand {
-  background-color:  rgb(0, 63, 100);
+/* Body */
+.container {
+  background-color: #ffffff;
+  margin-top: 2em;
+  margin-bottom: 5.5em;
+  border-radius: 5px;
+};
+
+#front-page-image {
+  background-color: #fdaf40;
+} 
+
+#front-page-div {
+  background-color: #fdaf40;
 }
 
+.card-header {
+  background-color: #fdaf40
+}
+
+/* Form */
 .sign-form {
   width: 30%;
   box-flex: center;
@@ -105,22 +86,8 @@ body {
   min-width: 600px;
 }
 
-p, 
-h1,
-h2,
-h3,
-h4,
-label, 
-button {
-  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-}
-
-.card-header {
-  background-color: #fdaf40
-}
-
-.footer-copyright {
-  color: white;
+.radio {
+  display: block;
 }
 
 /*auto-complete style*/
