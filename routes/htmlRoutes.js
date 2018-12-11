@@ -1,4 +1,4 @@
-var db = require("../models");
+// var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
@@ -13,6 +13,7 @@ module.exports = function(app) {
   // });
 
   app.get("/", function(req, res) {
+    console.log("USER", JSON.stringify(req.user, null, 2));
     res.render("index");
   });
 
