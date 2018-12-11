@@ -3,10 +3,23 @@ var passport = require("passport");
 
 module.exports = function(app) {
   //============================
+  //Functions
+  //============================
+
+  function RenderedView(policy, vote, voting, voted, unauthenticated) {
+    this.policy = JSON.parse(JSON.stringify(policy));
+    this.vote = JSON.parse(JSON.stringify(vote));
+    this.voting = voting;
+    this.voted = voted;
+    this.unauthenticated = unauthenticated;
+  }
+
+  //============================
   //Policy routes
   //============================
+
   // Get all of the posts related to a search term
-  app.get("/api/search/:term", function(req, res) {
+  app.get("/api/search/:term", (req, res) => {
     var term = "%" + req.params.term + "%";
     db.Post.findAll({
       where: {
@@ -28,31 +41,54 @@ module.exports = function(app) {
     });
   });
 
-  // Get one posts detail by post id
-  app.get("/policy/:id", function(req, res) {
+  // Get policy and render partial
+  app.get("/policy/:id", (req, res) => {
+    var accountId = req.user.accountId;
+    var postId = req.params.id;
     db.Post.findOne({
       where: {
-        id: req.params.id
+        id: postId
       }
-    }).then(function(dbPost) {
-      res.render("policydetail", { policy: dbPost });
+    }).then(dbPost => {
+      var policy = dbPost;
+      if (accountId) {
+        db.Count.findOne({
+          where: {
+            postId: postId,
+            accountId: accountId
+          }
+        }).then(dbCount => {
+          console.log(dbCount);
+          if (dbCount) {
+            // render vote result
+            view = new RenderedView(policy, dbCount, false, true, false);
+            res.render("policydetail", { policy: view });
+          } else {
+            // render vote form
+            view = new RenderedView(policy, null, true, false, false);
+            res.render("policydetail", { policy: view });
+          }
+        });
+      } else {
+        // render login message
+        view = new RenderedView(policy, null, false, false, true);
+        res.render("policydetail", { policy: view });
+      }
     });
   });
 
-  // Post submission
-  app.post("/api/post", function(req, res) {
-    console.log("api route accessed");
+  // Policy submission
+  app.post("/api/post", (req, res) => {
     db.Post.create({
       title: req.body.title,
       policyDetail: req.body.policyDetail,
       category: req.body.category //,
       // AccountId: req.body.accountId
     })
-      .then(function(dbPost) {
-        console.log("data", dbPost);
+      .then(dbPost => {
         res.json(dbPost);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log("error", error);
       });
   });
@@ -61,31 +97,17 @@ module.exports = function(app) {
   //Vote routes
   //============================
 
-  // Get vote record by policy and user id
-  app.get("/api/votes/:policy/:account", function(req, res) {
-    db.count
-      .findOne({
-        where: {
-          postId: reqparams.policy,
-          accountId: reqparams.account
-        }
-      })
-      .then(function(dbResult) {
-        console.log("data", dbResult);
-        res.json(dbResult);
-      });
-  });
-
   // Post new vote record
-  app.post("/api/vote", function(req, res) {
+  app.post("/api/vote", (req, res) => {
     db.Count.create({
+      accountId: req.user.accountId,
       postId: req.body.postId,
       choice: req.body.choice
     })
-      .then(function(dbInput) {
+      .then(dbInput => {
         res.json(dbInput);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log("error", error);
       });
   });
@@ -93,6 +115,7 @@ module.exports = function(app) {
   //============================
   //Authentication routes
   //============================
+
   // Authenticate user
   app.get(
     "/auth/facebook",
@@ -113,27 +136,7 @@ module.exports = function(app) {
       failureRedirect: "/signin"
     }),
     (req, res) => {
-      // req.session.user = req.user;
-      console.log(req.user);
       res.redirect("/");
     }
   );
-
-  // Lookup account
-  app.get("/api/account", function(req, res) {
-    console.log(req);
-    console.log(req.user);
-    console.log(req.user.id);
-    db.Account.findOne({
-      where: {
-        accountId: req.user.id
-      }
-    })
-      .then(data => {
-        res.json(data);
-      })
-      .catch(function(error) {
-        console.log("error", error);
-      });
-  });
 };

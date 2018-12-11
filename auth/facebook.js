@@ -12,7 +12,6 @@ module.exports = passport => {
         profileFields: ["id", "first_name", "last_name", "location"]
       },
       (accessToken, refreshToken, profile, done) => {
-        console.log("Facebook Strategy");
         db.Account.findOrCreate({
           where: {
             accountId: profile.id
@@ -26,7 +25,6 @@ module.exports = passport => {
             var user = dbAccount.get({
               plain: true
             });
-            console.log("New user: " + created);
             done(null, user);
           })
           .catch(err => {
