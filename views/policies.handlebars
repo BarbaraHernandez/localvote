@@ -2,7 +2,7 @@
 {{> nav2}}
 
 <div class="container">
-  <div class="col-xs-12" style="height:50px;"></div>
+  <div class="col-xs-12" style="height:30px;"></div>
 
   <div class="row">
     <div class="col-12">
@@ -10,15 +10,15 @@
         <h5 class="card-header">Find Policies</h5>
         <div class="card-body">
 
-          <div class="container">
+          <div class="flex-container">
             <input type="search" class="form-control" id="auto-complete" placeholder="Search">
             <hr>
           </div>
 
-          <div class="container" id="search-results">
+          <div class="flex-container" id="search-results">
           </div>
 
-          <div class="container" id="most-recent">
+          <div class="flex-container" id="most-recent">
             {{#each policy}}
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -34,6 +34,7 @@
 
     </div>
   </div>
+  <div class="col-xs-12" style="height:30px;"></div>
 </div>
 <div class="col-xs-12" style="height:50px;"></div>
 </div>
