@@ -14,7 +14,9 @@ module.exports = function(app) {
           {
             title: {
               $like: term
-            },
+            }
+          },
+          {
             policyDetail: {
               $like: term
             }
