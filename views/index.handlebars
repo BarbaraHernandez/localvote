@@ -1,26 +1,31 @@
 {{> header}}
 <div id="front-page-div" class="text-center">
-  {{!-- <img src="/images/localVote.png">  --}}
+  {{!-- <img src="/images/localVote.png"> --}}
   <img id="front-page-image" src="/images/imageandlogo.png">
 </div>
-{{> nav}} 
-
-
+{{> nav}}
 
 <div class="container">
-  <div class="col-xs-12" style="height:50px;"></div>
+
+  <div class="col-xs-12" style="height:50px;">
+
+  </div>
 
   <div class="row">
     <div class="col-12">
-      
-    <div><h3>LocalVote is a policy proposal system. Sign in to vote on local proposals to have your voice heard.
-    </h3><p>Policy proposals are voted on by local citizens and viewed by members of local government.</p></div>
+
+      <div>
+        <h3>LocalVote is a policy proposal system. Sign in to vote on local proposals to have your voice heard.
+        </h3>
+        <p>Policy proposals are voted on by local citizens and viewed by members of local government.</p>
+      </div>
       <div class="card">
         <h5 class="card-header">Recent Policy</h5>
         <div class="card-body">
           {{#if policy}}
-            <h5 class="card-title">{{policy.title}}</h5>
-            <p class="card-text">{{policy.policyDetail}}</p>
+          <h5 class="card-title">{{policy.title}}</h5>
+          <p class="card-text">{{policy.policyDetail}}</p>
+          <!--
             <form id="voteForm">
               <fieldset class="form-group">
                 <div class="form-check">
@@ -40,23 +45,19 @@
                 <button id="submit-vote" type="submit" class="btn btn-primary btn-lg">Submit Vote</button>
               </div>
             </form>
+            -->
           {{else}}
-            <h5 class="card-title">No policy found...</h5>
+          <h5 class="card-title">No policy found...</h5>
           {{/if}}
+        </div>
       </div>
+
+      <div class="col-xs-12" style="height:50px;">
+
+      </div>
+
+    </div>
   </div>
 
-  <div class="col-xs-12" style="height:50px;"></div>
-  </div>
-  </div>
-
- 
-  </div>
-   {{> footer}}
-
-
-      
-
-
-
-
+</div>
+{{> footer}}

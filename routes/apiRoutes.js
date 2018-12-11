@@ -45,14 +45,12 @@ module.exports = function(app) {
   app.get("/policy/:id", (req, res) => {
     var accountId = req.user.accountId;
     var postId = req.params.id;
-    console.log("USER", JSON.stringify(req.user, null, 2));
     db.Post.findOne({
       where: {
         id: postId
       }
     }).then(dbPost => {
       var policy = dbPost;
-      console.log(dbPost);
       if (accountId) {
         db.Count.findOne({
           where: {
@@ -62,24 +60,18 @@ module.exports = function(app) {
         }).then(dbCount => {
           console.log(dbCount);
           if (dbCount) {
-            // render results
+            // render vote result
             view = new RenderedView(policy, dbCount, false, true, false);
-            console.log(view);
-            console.log("render results partial");
             res.render("policydetail", { policy: view });
           } else {
-            // render vote partial
+            // render vote form
             view = new RenderedView(policy, null, true, false, false);
-            console.log(view);
-            console.log("render vote partial");
             res.render("policydetail", { policy: view });
           }
         });
       } else {
-        // render login button
+        // render login message
         view = new RenderedView(policy, null, false, false, true);
-        console.log("render login button");
-        console.log(view);
         res.render("policydetail", { policy: view });
       }
     });
