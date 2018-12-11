@@ -7,7 +7,7 @@ module.exports = passport => {
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:3000/auth/facebook/callback",
+        callbackURL: "https://local-vote.herokuapp.com/auth/facebook/callback",
         enableProof: true,
         profileFields: ["id", "first_name", "last_name", "location"]
       },
