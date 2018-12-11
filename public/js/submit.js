@@ -4,8 +4,6 @@ $(document).ready(function() {
   var topicInput = $("#selectTopic");
   var form = $("#newPolicy");
 
-  console.log("submit.js loaded");
-
   //default value of topic
   topicInput.val("General");
 

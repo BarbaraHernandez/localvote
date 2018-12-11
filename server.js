@@ -1,5 +1,7 @@
 // Keys
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 // Dependencies
 var express = require("express");
@@ -11,29 +13,15 @@ var db = require("./models");
 var authInit = require("./auth/init");
 var authFacebookStrategy = require("./auth/facebook");
 
+// Passport
+// strategy first
+authFacebookStrategy(passport);
+// serialize/deserialize second
+authInit(passport);
+
 // Initialize Express
 var app = express();
 var PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(express.static("public"));
-app.use(favicon(__dirname + "/favicon.ico"));
-
-// Passport
-authInit(passport);
-authFacebookStrategy(passport);
-app.use(passport.initialize());
-
-app.use(
-  session({
-    secret: "votes",
-    resave: true,
-    saveUninitialized: true
-  })
-);
-app.use(passport.session());
 
 // Handlebars
 app.engine(
@@ -44,6 +32,24 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+
+// Middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static("public"));
+app.use(favicon(__dirname + "/favicon.ico"));
+
+// express session
+app.use(
+  session({
+    secret: "votes",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 require("./routes/htmlRoutes.js")(app);
