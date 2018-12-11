@@ -81,7 +81,8 @@ body {
 }
 
 #hands-div {
-  background-color: white;
+  background-color: #003f64;
+  border-top: 5px solid #003f64;
 }
 
 #hands-image {
@@ -112,6 +113,10 @@ button {
 
 .card-header {
   background-color: #fdaf40
+}
+
+.footer-copyright {
+  color: white;
 }
 
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
